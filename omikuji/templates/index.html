@@ -1,4 +1,4 @@
-{% extends './layout.html' %}
+{% extends 'layout.html' %}
 {% block content %}
   <h1>おみくじリスト</h1>
   {% if searchForm %}
@@ -19,7 +19,9 @@
     </tr>
     {% endfor %}
   </table>
-  <div>
-    <a href='{% url "omikuji:new" %}' class='btn btn-outline-primary'>新規</a>
-  </div>
+  {% if user.is_authenticated %}
+    <div>
+      <a href='{% url "omikuji:new" %}' class='btn btn-outline-primary'>新規</a>
+    </div>
+  {% endif %}
 {% endblock %}
