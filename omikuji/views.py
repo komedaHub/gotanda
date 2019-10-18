@@ -1,7 +1,20 @@
+import django_filters
+from rest_framework import viewsets, filters
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Omikuji, Omikuji_items
+from .serializer import OmikujiSerializer,OmikujiItemSerializer
 from .forms import SearchForm,OmikujiForm
+
+class OmikujiViewSet(viewsets.ModelViewSet):
+    queryset = Omikuji.objects.all()
+    serializer_class = OmikujiSerializer
+    filter_fields = ('id','name')
+
+class OmikujiItemViewSet(viewsets.ModelViewSet):
+    queryset = Omikuji_items.objects.all()
+    serializer_class = OmikujiItemSerializer
 
 # Create your views here.
 def index(request):
